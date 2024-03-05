@@ -1,18 +1,56 @@
 import unittest
 from student import Student
+from datetime import timedelta
 
 class TestStudent(unittest.TestCase):
 
-    def test_full_name(self):
-        student = Student('John', 'Doe')
+    """adding the @classmethod decorator to a method  and passing ‘cls’ as a method parameter  
+    will make it a class method which acts on the  class instead of an instance of the class."""
 
-        self.assertEqual(student.full_name, 'John Doe')
+    @classmethod  # @classmethod  decorator. Just to reiterate
+    def setUpClass(cls):
+        print('setUpClass')
+
+    
+    @classmethod
+    def tearDownClass(cls):
+        print('tearDownClass')   
+
+
+    def setUp(self): # using the setUp method save us code repetition of having to rewrite John Doe 
+        print("setup")
+        self.student = Student('John', 'Doe')
+
+     
+    def tearDown(self):
+        print('tearDown')
+    
+
+    def test_full_name(self):
+        print("test_full_name")
+        self.assertEqual(self.student.full_name, 'John Doe')
+
+
+    def test_email(self):
+        print("test_email")
+        self.assertEqual(self.student.email, 'john.doe@email.com')
+
 
     def test_alert_santa(self):
-        student = Student('John', 'Doe')
-        student.alert_santa()
+        print("test_alert_santa")
+        self.student.alert_santa()
 
-        self.assertTrue(student.naughty_list)
+        self.assertTrue(self.student.naughty_list)
+
+
+    def test_apply_extension(self):
+        # extend the student end date
+        print('test_apply_extension')
+        old_end_date = self.student.end_date
+        self.student.apply_extension(5) # date extended by 5 days
+
+        self.assertEqual(self.student.end_date, old_end_date + timedelta(days=5))
+
         
 
 if __name__ == '__main__':
