@@ -8,7 +8,7 @@ class TestStudent(unittest.TestCase):
     """adding the @classmethod decorator to a method  and passing ‘cls’ as a method parameter  
     will make it a class method which acts on the  class instead of an instance of the class."""
 
-    @classmethod  # @classmethod  decorator. Just to reiterate
+    @classmethod # @classmethod decorator.Just to reiterate The method logic acts on the class itself instead of class instances
     def setUpClass(cls):
         print('setUpClass')
 
